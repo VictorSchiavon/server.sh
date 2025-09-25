@@ -32,13 +32,13 @@ export default function HomePage() {
       handleStartQuiz()
     } else {
       // You can replace this with your actual purchase/checkout URL
-      window.open("https://checkout.exemplo.com/produto-emagrecimento", "_blank")
+      window.open("https://pay.braip.co/ref?pv=proxxnde&af=afixjx7mvd", "_blank")
     }
   }
 
   const handleWhatsAppContact = (message: string) => {
     // Replace with your actual WhatsApp number
-    const phoneNumber = "5511999999999" // Replace with real number
+    const phoneNumber = "551193649040" // Replace with real number
     const encodedMessage = encodeURIComponent(message)
     window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, "_blank")
   }
