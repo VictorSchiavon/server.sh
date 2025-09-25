@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { Inter, JetBrains_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
-import Script from "next/script" // <--- IMPORTANTE
+import Script from "next/script"
 import "./globals.css"
 
 const inter = Inter({
@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        {/* Google tag (gtag.js) */}
+        {/* Google Analytics */}
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-SNX9ZVW27K"
@@ -44,8 +44,34 @@ export default function RootLayout({
             gtag('config', 'G-SNX9ZVW27K');
           `}
         </Script>
+
+        {/* Meta Pixel (Facebook Pixel) */}
+        <Script id="facebook-pixel" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '1735614350566153');
+            fbq('track', 'PageView');
+          `}
+        </Script>
       </head>
       <body className={`font-sans ${inter.variable} ${jetbrainsMono.variable}`}>
+        {/* Fallback do Meta Pixel (noscript) */}
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=1735614350566153&ev=PageView&noscript=1"
+          />
+        </noscript>
+
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
       </body>
